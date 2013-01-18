@@ -1,0 +1,24 @@
+package com.crawljax.plugin.dommutation;
+
+import com.crawljax.browser.EmbeddedBrowser;
+import com.crawljax.core.CrawljaxException;
+import com.crawljax.core.plugin.OnUrlLoadPlugin;
+
+public class OnUrlLoadImplforInjactingJS implements OnUrlLoadPlugin {
+	
+
+	@Override
+	public void onUrlLoad(EmbeddedBrowser browser) {
+		// TODO Auto-generated method stub
+		StringBuffer JS = new StringBuffer();
+		
+		try {
+			browser.executeJavaScript(JS.toString());
+		} catch (CrawljaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+}
