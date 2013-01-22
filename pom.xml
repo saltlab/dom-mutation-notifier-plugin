@@ -10,7 +10,6 @@
 
 	<groupId>plugin</groupId>
 	<artifactId>dom-mutation-notifier-plugin</artifactId>
-	<version>y</version>
 	<packaging>jar</packaging>
 	<name>A Crawljax plugin.</name>
 	<description>A plugin for...</description>
@@ -28,4 +27,5 @@
 		</dependency>
 	</dependencies>
 
+	<version>1.0</version>
 </project>
