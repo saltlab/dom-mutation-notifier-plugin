@@ -1,12 +1,12 @@
 package com.crawljax.plugins.domchange;
-import org.apache.log4j.Logger;
+
 import com.crawljax.browser.EmbeddedBrowser;
 import com.crawljax.core.CrawljaxException;
 import com.crawljax.core.plugin.OnUrlLoadPlugin;
 
 public class OnUrlLoadJsInjectoinNoProxy implements OnUrlLoadPlugin {
 	
-	private static final Logger LOGGER = Logger.getLogger(OnUrlLoadJsInjectoinNoProxy.class.getName());
+//	private static final Logger LOGGER = Logger.getLogger(OnUrlLoadJsInjectoinNoProxy.class.getName());
 
 	@Override
 	public void onUrlLoad(EmbeddedBrowser browser) {
@@ -50,7 +50,7 @@ public class OnUrlLoadJsInjectoinNoProxy implements OnUrlLoadPlugin {
 			}
 			else{
 				
-				LOGGER.warn("retrieving Injectionfalg by executing JS returned null!! ");
+//				LOGGER.warn("retrieving Injectionfalg by executing JS returned null!! ");
 			}
 		} catch (CrawljaxException e) {
 			// TODO Auto-generated catch block

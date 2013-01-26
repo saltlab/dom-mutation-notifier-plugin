@@ -1,7 +1,6 @@
 package com.crawljax.plugins.domchange.runners;
 
 import org.apache.commons.configuration.ConfigurationException;
-import org.apache.log4j.Logger;
 import com.crawljax.browser.EmbeddedBrowser.BrowserType;
 import com.crawljax.core.CrawljaxController;
 import com.crawljax.core.CrawljaxException;

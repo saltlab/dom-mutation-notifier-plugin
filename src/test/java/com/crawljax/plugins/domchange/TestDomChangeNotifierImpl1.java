@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.apache.commons.configuration.ConfigurationException;
-import org.apache.log4j.Logger;
+
 import com.crawljax.browser.EmbeddedBrowser.BrowserType;
 import com.crawljax.core.CrawljaxController;
 import com.crawljax.core.CrawljaxException;
