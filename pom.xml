@@ -10,7 +10,7 @@
 
 	<groupId>plugin</groupId>
 	<artifactId>dom-mutation-notifier-plugin</artifactId>
-	<packaging>jar</packaging>
+	<packaging>ejb</packaging>
 	<name>A Crawljax plugin.</name>
 	<description>A plugin for...</description>
 	<url>http://crawljax.com</url>
@@ -25,7 +25,23 @@
 			<artifactId>crawljax-core</artifactId>
 			<version>${crawljax.version}</version>
 		</dependency>
+		<dependency>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+    <version>1.0.9</version>
+</dependency>
 	</dependencies>
+	<build>
+	<plugins>
+	<plugin>
+             <groupId>org.apache.maven.plugins</groupId>
+             <artifactId>maven-ejb-plugin</artifactId>
+             <configuration>
+                 <ejbVersion>3.0</ejbVersion>
+             </configuration>
+         </plugin>
+	</plugins>
+	</build>
 
 	<version>1.0</version>
 </project>
