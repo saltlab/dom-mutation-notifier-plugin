@@ -19,11 +19,15 @@ import com.crawljax.core.configuration.CrawljaxConfiguration;
 import com.crawljax.plugins.domchange.DomChangeNotifierImpl;
 
 public class TestDomChangeNotifierImpl2 {
+	
+	public TestDomChangeNotifierImpl2() {
+		// TODO Auto-generated constructor stub
+		String name = "Test4AddingMutipleNodes.html";
+		URL = this.getClass().getResource(name).getPath();
+	}
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		JOptionPane.showMessageDialog(null, "make sure the html files are put on your local server at the following address:\n" +
-				"http://localhost/DomMutationPluginTests/Test4AddingMutipleNodes.html");
 	}
 
 	@AfterClass
@@ -39,14 +43,17 @@ public class TestDomChangeNotifierImpl2 {
 	}
 
 	
-	private static final String URL = "http://localhost/DomMutationPluginTests/Test4AddingMutipleNodes.html";
+	private static String URL = null;
 	
 	private static final int MAX_CRAWL_DEPTH = 3;
 	private static final int MAX_STATES = 10;
 
 	private static CrawlSpecification getCrawlSpecification() {
+		
+		
 
-		CrawlSpecification crawler = new CrawlSpecification(URL);
+		CrawlSpecification crawler = new CrawlSpecification("file://" + URL);
+
 
 		// elements to be clicked on
 		crawler.click("div");

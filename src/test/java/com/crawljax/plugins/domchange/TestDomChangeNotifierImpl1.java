@@ -2,6 +2,8 @@ package com.crawljax.plugins.domchange;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+
 import javax.swing.JOptionPane;
 
 import org.junit.After;
@@ -19,11 +21,16 @@ import com.crawljax.core.configuration.CrawljaxConfiguration;
 import com.crawljax.plugins.domchange.DomChangeNotifierImpl;
 
 public class TestDomChangeNotifierImpl1 {
+	
+	public TestDomChangeNotifierImpl1() {
+		// TODO Auto-generated constructor stub
+		String name = "Test2AddingAndRemoving.html";
+		URL = this.getClass().getResource(name).getPath();
+	}
+
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		JOptionPane.showMessageDialog(null, "make sure the html files are put on your local server at the following address:\n" +
-				"http://localhost/DomMutationPluginTests/Test2AddingAndRemoving.html");
 	}
 
 	@AfterClass
@@ -39,14 +46,17 @@ public class TestDomChangeNotifierImpl1 {
 	}
 
 	
-	private static final String URL = "http://localhost/DomMutationPluginTests/Test2AddingAndRemoving.html";
+	private static  String URL = null;
 	
 	private static final int MAX_CRAWL_DEPTH = 3;
 	private static final int MAX_STATES = 10;
 
 	private static CrawlSpecification getCrawlSpecification() {
 
-		CrawlSpecification crawler = new CrawlSpecification(URL);
+		//("file://" + new File(FILENAME).getAbsolutePath());
+
+		        
+		CrawlSpecification crawler = new CrawlSpecification("file://" + URL);
 
 		// elements to be clicked on
 		crawler.click("div");

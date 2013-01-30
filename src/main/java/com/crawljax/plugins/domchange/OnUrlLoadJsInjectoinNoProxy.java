@@ -26,16 +26,32 @@ public class OnUrlLoadJsInjectoinNoProxy implements OnUrlLoadPlugin {
 				results =  object.toString();
 				if (results.equalsIgnoreCase("true"))
 				{
-					buffer = new StringBuffer();
+					/*buffer = new StringBuffer();
 					buffer.append(" var JsElement = document.createElement(\'script\'); ");
 					buffer.append(" JsElement.setAttribute(\'type\',\'text/javascript\'); ");
 					buffer.append(" JsElement.setAttribute(\'id\',\'SaltLabJavaScript\'); ");
 					buffer.append(" JsElement.setAttribute(\'src\',\'http://localhost/js/test.js\'); ");			
 					buffer.append(" document.getElementsByTagName(\"head\")[0].appendChild(JsElement); ");
 					
+					
 					String string = buffer.toString();
 					browser.executeJavaScript(string);
+					
+					*/
+					
+					buffer = new StringBuffer();
+					buffer.append(" var JsElement = document.createElement('script'); ");
+					buffer.append(" JsElement.setAttribute('type','text/javascript'); ");
+					buffer.append(" JsElement.setAttribute('id','SaltLabJavaScript'); ");
+					buffer.append(" JsElement.innerHTML = " + DomChangeNotifierImpl.mutationSummery + " ; ");		
 
+					buffer.append(" document.getElementsByTagName('head')[0].appendChild(JsElement); ");
+
+					buffer.append(" document.getElementsByTagName(\"head\")[0].appendChild(JsElement); ");
+					String string = buffer.toString();
+					browser.executeJavaScript(string);
+					
+			
 					buffer = new StringBuffer();
 					buffer.append(" var JsElement2 = document.createElement('script'); ");
 					buffer.append(" JsElement2.setAttribute('type','text/javascript'); ");

@@ -3,6 +3,10 @@
  */
 package com.crawljax.plugins.domchange;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import com.crawljax.browser.EmbeddedBrowser;
 import com.crawljax.core.CrawljaxException;
 import com.crawljax.core.configuration.CrawljaxConfiguration;
@@ -14,12 +18,27 @@ import com.crawljax.core.state.Eventable;
  * 
  */
 public class DomChangeNotifierImpl implements DomChangeNotifierPlugin {
+	
+	public static String mutationSummery = null;
 
 	public DomChangeNotifierImpl(CrawljaxConfiguration crawljaxConfiguration) {
 
+		
+		
 		OnUrlLoadJsInjectoinNoProxy pl = new OnUrlLoadJsInjectoinNoProxy();
 		crawljaxConfiguration.addPlugin(pl);
 
+		
+		try {
+			
+			String name = "converted.js";
+
+			String path = 	this.getClass().getResource(name).getPath();
+			mutationSummery = readFileAsString(	path);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/*
@@ -84,14 +103,30 @@ public class DomChangeNotifierImpl implements DomChangeNotifierPlugin {
 			
 			
 			// our code does not exist so we need to append it and run the default domComparison
-			buffer = new StringBuffer();
-			buffer.append(" var JsElement = document.createElement(\'script\'); ");
+//		buffer = new StringBuffer();
+/*			buffer.append(" var JsElement = document.createElement(\'script\'); ");
 			buffer.append(" JsElement.setAttribute(\'type\',\'text/javascript\'); ");
 			buffer.append(" JsElement.setAttribute(\'id\',\'SaltLabJavaScript\'); ");
 			buffer.append(" JsElement.setAttribute(\'src\',\'http://localhost/js/test.js\'); ");
 			buffer.append(" document.getElementsByTagName(\"head\")[0].appendChild(JsElement); ");
 			String string = buffer.toString();
 			browser.executeJavaScript(string);
+	*/		
+		
+		buffer = new StringBuffer();
+			buffer.append(" var JsElement = document.createElement('script'); ");
+			buffer.append(" JsElement.setAttribute('type','text/javascript'); ");
+			buffer.append(" JsElement.setAttribute('id','SaltLabJavaScript'); ");
+			buffer.append(" JsElement.innerHTML = " + mutationSummery + " ; ");		
+
+			buffer.append(" document.getElementsByTagName('head')[0].appendChild(JsElement); ");
+
+			buffer.append(" document.getElementsByTagName(\"head\")[0].appendChild(JsElement); ");
+			String string = buffer.toString();
+			browser.executeJavaScript(string);
+			
+			browser.getWebElement(null);
+
 
 			buffer.append(" var JsElement2 = document.createElement('script'); ");
 			buffer.append(" JsElement2.setAttribute('type','text/javascript'); ");
@@ -119,6 +154,23 @@ public class DomChangeNotifierImpl implements DomChangeNotifierPlugin {
 
 
 	}
+	
+	   /** @param filePath the name of the file to open. Not sure if it can accept URLs or just filenames. Path handling could be better, and buffer sizes are hardcoded
+	    */ 
+	    public static String readFileAsString(String filePath) throws java.io.IOException{
+	        StringBuffer fileData = new StringBuffer(1000);
+	        BufferedReader reader = new BufferedReader(
+	                new FileReader(filePath));
+	        char[] buf = new char[1024];
+	        int numRead=0;
+	        while((numRead=reader.read(buf)) != -1){
+	            String readData = String.valueOf(buf, 0, numRead);
+	            fileData.append(readData);
+	            buf = new char[1024];
+	        }
+	        reader.close();
+	        return fileData.toString();
+	    }
 
 	private boolean defaultComparison(String domBefore, Eventable eventable,
 			String domAfter) {
