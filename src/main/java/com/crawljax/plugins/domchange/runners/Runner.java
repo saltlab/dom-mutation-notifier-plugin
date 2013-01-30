@@ -10,6 +10,9 @@ import com.crawljax.plugins.domchange.DomChangeNotifierImpl;
 
 public final class Runner {
 	
+	
+	
+	
 	private static final int MAX_CRAWL_DEPTH = 3;
 	private static final int MAX_STATES = 10;
 
